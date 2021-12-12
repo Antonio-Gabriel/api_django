@@ -16,6 +16,7 @@ class Avaliacao(Base, models.Model):
 
         # Restringir para o usuários avaliar unicamente um curso
         unique_together = ['email', 'curso'] 
+        db_table = "avaliacao"
 
     def __str__(self):
         return f'{self.nome} avaliou o curso {self.curso} com nota {self.avaliacao}'
