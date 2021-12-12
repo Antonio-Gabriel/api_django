@@ -8,6 +8,8 @@ class Curso(Base, models.Model):
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
+
+        db_table = "curso"
     
     def __str__(self):
         return self.titulo
