@@ -13,6 +13,8 @@ class Avaliacao(Base, models.Model):
     class Meta:
         verbose_name = "Avaliação"
         verbose_name_plural = "Avaliações"
+        
+        ordering = ['id']
 
         # Restringir para o usuários avaliar unicamente um curso
         unique_together = ['email', 'curso'] 
