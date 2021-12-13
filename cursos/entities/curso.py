@@ -10,6 +10,7 @@ class Curso(Base, models.Model):
         verbose_name_plural = 'Cursos'
 
         db_table = "curso"
+        ordering = ['id']
     
     def __str__(self):
         return self.titulo
