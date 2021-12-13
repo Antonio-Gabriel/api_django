@@ -51,6 +51,23 @@ class CursoViewSet(viewsets.ModelViewSet):
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
 
+    @action(detail=True, methods=['get'])
+    def avaliacoes(self, request, pk=None):
+        # Definir paginação interna
+        self.pagination_class.page_size = 1
+        avaliacoes = Avaliacao.objects.filter(curso_id=pk)
+        page = self.paginate_queryset(avaliacoes)
+
+        if page is not None:
+            serializer = AvaliacaoSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        # curso = self.get_object()
+        # serializer = AvaliacaoSerializer(curso.avaliacoes.all(), many=True)
+        #         
+        serializer = AvaliacaoSerializer(avaliacoes, many=True)
+        return Response(serializer.data)
+
 class AvaliacaoViewSet(viewsets.ModelViewSet):
     queryset = Avaliacao.objects.all()
     serializer_class = AvaliacaoSerializer
